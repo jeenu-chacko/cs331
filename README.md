@@ -3,6 +3,6 @@
 # SYSTEM SOFTWARE LAB
 
 
-# 1. Program 1
- # - fcfs.c : fcfs non-preemptive CPU sheduling  
- # - sjf.c : sjf non-preemptive CPU sheduling  
+1. Program 1
+  - fcfs.c : first come,first served  non-preemptive CPU sheduling  
+  - sjf.c : shortest job first non-preemptive CPU sheduling  
