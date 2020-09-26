@@ -86,7 +86,7 @@ float avg_wt=0,avg_tat=0;
 	printf("First Come First Serve\n\n");
 	printf("\tProcess\t\tTurn around time\tWaiting Time\n\n");
 
-	for(i=0;i<5;i++)
+	for(i=0;i<n;i++)
 	{	p[i].tat=p[i].c_time-p[i].arrival_time;
 		avg_tat=avg_tat+p[i].tat;
 		p[i].wt = p[i].tat-p[i].burst_time;
@@ -96,8 +96,8 @@ float avg_wt=0,avg_tat=0;
 	}
 	printf("\n");
 
-	printf("Average waiting time is %f\n",avg_wt/5);
-	printf("Average turn around time is %f\n",avg_tat/5);
+	printf("Average waiting time is %f\n",avg_wt/n);
+	printf("Average turn around time is %f\n",avg_tat/n);
 	
 	
 return 0;
