@@ -1,5 +1,17 @@
+/** 
+ * @file program 1/sjf.c
+ * @author Jeenu Chacko
+ * 
+ * cs331 System Software Lab 
+ * 
+ * Implementation of Non-Pre-Emptive Shortest Job First (SJF)
+ * CPU Scheduling Algorithm for finding turnaround time and waiting time.
+ *  
+ */
+
+
 #include<stdio.h>
-#include<string.h>
+
 struct address 
 { 
  int pin; 
@@ -10,26 +22,27 @@ struct address
  float wt;
 }p[20],temp,wt;
 
+
 int main()
 {
-int i,a[20],j,n;
+int i,j,n;
 float avg_wt=0,avg_tat=0;
 	
-	printf("Enter the no of process");
+	printf("Enter the no of process ");
 	scanf("%d",&n);
 	for(i=0;i<n;i++)
 	{
-	printf("enter the process id");
+	printf("Enter the process id ");
 	scanf("%d",&p[i].pin);
-	printf("enter the process arival time (ms) ");
+	printf("Enter the process arival time (ms) ");
 	scanf("%d",&p[i].arrival_time);
-	printf("enter the process burst time (ms) ");
+	printf("Enter the process burst time (ms) ");
 	scanf("%d",&p[i].burst_time);
+	
 	
 	}
 
-	for(i=0;i<n-1;i++)
-	{
+	i=0;
 		for(j=i+1;j<n;j++)
 		{
 			if(p[i].arrival_time > p[j].arrival_time)
@@ -49,9 +62,39 @@ float avg_wt=0,avg_tat=0;
 
 			}
 		}
+	
+
+
+	for(i=1;i<n-1;i++)
+	{
+		for(j=i+1;j<n;j++)
+		{
+			if(p[i].burst_time > p[j].burst_time)
+			{
+			temp = p[j];
+			p[j] = p[i];
+			p[i] = temp;
+			}	
+			else if(p[i].burst_time==p[j].burst_time)
+			{
+				if(p[i].arrival_time > p[j].arrival_time)
+				{
+					temp = p[j];
+					p[j] = p[i];
+					p[i] = temp;
+				}
+
+			}
+		}
 	}
 
 
+
+
+
+
+
+	j=1;
 
 	for(i=0;i<n;i++)
 	{		
@@ -61,15 +104,16 @@ float avg_wt=0,avg_tat=0;
 			}	
 			else
 			{
-			p[i].c_time=p[i-1].c_time+p[i].burst_time;
+			
+				if(p[i].arrival_time < p[i-j].c_time)
+					p[i].c_time=p[i-1].c_time+p[i].burst_time;
 			}
 	
-	}
+	}	
 
-	
 
 	printf("\n\n");
-	printf("First Come First Serve\n\n");
+	printf("Shortest Job First\n\n");
 	printf("\tProcess\t\tTurn around time\tWaiting Time\n\n");
 
 	for(i=0;i<5;i++)
