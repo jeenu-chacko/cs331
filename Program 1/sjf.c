@@ -26,7 +26,7 @@ struct process
 
 int main()
 {
-int i,j,n;
+int i,j,n,flag=0,k,z,x;
 float avg_wt=0,avg_tat=0;
 	
 	printf("Enter the no of process");
@@ -39,7 +39,7 @@ float avg_wt=0,avg_tat=0;
 	scanf("%d",&p[i].arrival_time);
 	printf("Enter the process burst time (ms) ");
 	scanf("%d",&p[i].burst_time);
-	
+	p[i].c_time=0;
 	
 	}
 
@@ -89,6 +89,10 @@ float avg_wt=0,avg_tat=0;
 					p[j] = p[i];
 					p[i] = temp;
 				}
+				
+				
+
+
 
 			}
 		}
@@ -104,19 +108,57 @@ float avg_wt=0,avg_tat=0;
 
 
 
-
 	for(i=0;i<n;i++)
 	{		
-			if(i==0)
-			{
-			p[i].c_time=p[i].burst_time+p[i].arrival_time;
-			}	
-			else
-			{
-			p[i].c_time=p[i-1].c_time+p[i].burst_time;
-			}
+		if(i==0)
+		{
+		p[i].c_time=p[i].burst_time+p[i].arrival_time;
+		}	
+		else if((p[i-1].c_time>=p[i].arrival_time)&&(p[i].c_time==0))
+		{
+		p[i].c_time=p[i-1].c_time+p[i].burst_time;
+		}
+		else
+		{
+		for(k=i;k<n;k++)
+		{
+		if((p[i-1].c_time>=p[k].arrival_time)&&(p[i].c_time==0)&&(flag==0))
+		{
+			p[k].c_time=p[i-1].c_time+p[k].burst_time;		
+			flag=1;
+			temp=p[i];							
+			p[i]=p[k];									
+			p[k]=temp;
 
-			
+			for(x=i+1;x<n-1;x++)
+			{
+			for(z=i+2;z<n;z++)
+			{	
+
+				if(p[x].burst_time > p[z].burst_time)							
+												
+				{
+				temp = p[x];
+				p[x] = p[z];
+				p[z] = temp;
+				}	
+				else if(p[x].burst_time==p[z].burst_time)
+				{
+				if(p[x].arrival_time > p[z].arrival_time)
+				{
+				temp = p[x];
+				p[x] = p[z];
+				p[z] = temp;
+				}
+				}	
+			 }
+			 }
+		}
+				
+		
+		}
+
+		}
 	
 	}	
 
