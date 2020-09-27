@@ -71,7 +71,7 @@ float avg_wt=0,avg_tat=0;
 	{		
 			if(i==0)
 			{
-			p[i].c_time=p[i].burst_time;
+			p[i].c_time=p[i].burst_time+p[i].arrival_time;;
 			}	
 			else
 			{

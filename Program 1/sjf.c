@@ -1,18 +1,19 @@
 /** 
- * @file program 1/sjf.c
+ * @file program 1/fcfs.c
  * @author Jeenu Chacko
  * 
  * cs331 System Software Lab 
  * 
- * Implementation of Non-Pre-Emptive Shortest Job First (SJF)
+ * Implementation of Non-Pre-Emptive First Come First Serve (FCFS)
  * CPU Scheduling Algorithm for finding turnaround time and waiting time.
  *  
  */
 
 
+
 #include<stdio.h>
 
-struct address 
+struct process 
 { 
  int pin; 
  int burst_time;
@@ -28,7 +29,7 @@ int main()
 int i,j,n;
 float avg_wt=0,avg_tat=0;
 	
-	printf("Enter the no of process ");
+	printf("Enter the no of process");
 	scanf("%d",&n);
 	for(i=0;i<n;i++)
 	{
@@ -42,7 +43,11 @@ float avg_wt=0,avg_tat=0;
 	
 	}
 
-	i=0;
+
+
+
+	for(i=0;i<n-1;i++)
+	{
 		for(j=i+1;j<n;j++)
 		{
 			if(p[i].arrival_time > p[j].arrival_time)
@@ -62,7 +67,8 @@ float avg_wt=0,avg_tat=0;
 
 			}
 		}
-	
+	}
+
 
 
 	for(i=1;i<n-1;i++)
@@ -88,26 +94,29 @@ float avg_wt=0,avg_tat=0;
 		}
 	}
 
+	
 
 
 
 
 
 
-	j=1;
+
+
+
 
 	for(i=0;i<n;i++)
 	{		
 			if(i==0)
 			{
-			p[i].c_time=p[i].burst_time;
+			p[i].c_time=p[i].burst_time+p[i].arrival_time;
 			}	
 			else
 			{
-			
-				if(p[i].arrival_time < p[i-j].c_time)
-					p[i].c_time=p[i-1].c_time+p[i].burst_time;
+			p[i].c_time=p[i-1].c_time+p[i].burst_time;
 			}
+
+			
 	
 	}	
 
