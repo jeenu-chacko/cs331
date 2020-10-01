@@ -4,5 +4,5 @@
 
 
 1. Program 1
-  	-	**fcfs.c** : first come,first served  non-preemptive CPU sheduling  
-	- **sjf.c** : shortest job first non-preemptive CPU sheduling  
+  	-	**fcfs.c** : First Come First Serve non-preemptive CPU scheduling  
+	- **sjf.c** : Shortest Job First non-preemptive CPU scheduling  
